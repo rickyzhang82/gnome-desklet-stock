@@ -1,0 +1,8 @@
+{
+    "uuid": "stocks@fthuin", 
+    "icon": "emblem-sales", 
+    "name": "Stocks Desklet", 
+    "last-edited": "1455821944", 
+    "prevent-decorations": true, 
+    "description": "A desklet that displays stocks from Yahoo Finance"
+}
