@@ -13,6 +13,16 @@
     text-align : center;
 }
 
+.stocks-label-up {
+    text-align : center;
+    color : #00FF00
+}
+
+.stocks-label-down {
+    text-align : center;
+    color : #FF0000
+}
+
 .stocks-table-item {
     padding-left : 2px;
     padding-right : 5px;

@@ -179,7 +179,7 @@ MyDesklet.prototype = {
             var myStock = quotes[i];
             var cur = "";
 
-            cur = get_currency_symbol(myStock.Currency);
+            /*cur = get_currency_symbol(myStock.Currency);*/
 
             /* Set the change icon, last char is % so must be ignored : */
             if (myStock.PercentChange === null) {
@@ -189,18 +189,21 @@ MyDesklet.prototype = {
             var binIcon = new St.Bin( {height : "20px", width : "20px" });
             binIcon.set_child(getChangeIcon(myStock.PercentChange));
 
-            // Second column is the name of the company
-            var stockName = createLabel(myStock.name);
+            var direction = "down";
+
+            if (parseFloat(myStock.PercentChange.slice(0,-1)) > 0)
+              direction = "up"
 
             // Third thing is the stock symbol
-            var stockSymbol = createLabel(myStock.symbol);
+            var stockSymbol = createColorLabel(myStock.symbol, direction);
 
-            var stockPrice = createLabel(cur + '' + myStock.LastTradePriceOnly);
+            var stockPrice = createColorLabel(myStock.LastTradePriceOnly, direction);
 
             // Fifth thing is the percent change
-            var stockPerChange = createLabel(myStock.PercentChange);
+            var stockPerChange = createColorLabel(myStock.PercentChange, direction);
 
-            addToTable(stockTable, i, [binIcon, stockName, stockSymbol, stockPrice, stockPerChange]);
+            addToTable(stockTable, i, [binIcon, stockSymbol, stockPrice, stockPerChange]);
+
         }
 
         stocksBox.add_actor(stockTable);
@@ -276,6 +279,22 @@ function createLabel(string) {
             text : string,
             style_class : "stocks-label"
     });
+    return label;
+}
+
+function createColorLabel(string, direction) {
+    if (direction == "up") {
+      var label = new St.Label({
+              text : string,
+              style_class : "stocks-label-up"
+      });
+    } else {
+      var label = new St.Label({
+              text : string,
+              style_class : "stocks-label-down"
+      });
+    }
+
     return label;
 }
 
